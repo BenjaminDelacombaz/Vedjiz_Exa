@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Toast } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DataProvider } from '../providers/data/data';
 
 import { HomePage } from '../pages/home/home';
 import { SyncroPage } from '../pages/syncro/syncro';
@@ -16,10 +17,10 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(private dataProvider: DataProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    // used for an example of ngFor and navigation and for all
     this.pages = [
       { title: 'Accueil', component: HomePage },
       { title: 'Synchronisation', component: SyncroPage }
@@ -40,5 +41,14 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  // Switch to another status
+  async switchStatus(adminUser: boolean) {
+    try{
+      await this.dataProvider.setAdmin(adminUser)
+    } catch(error) {
+      alert(error)
+    }
   }
 }

@@ -15,8 +15,11 @@ export class DataProvider {
 
   private endpoint: string = `http://vedjserver.mycpnv.ch/api/v1/`
   products: Array<Product> = []
+  status: string
+  isAdmin: boolean
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
+    this.setStatus()
   }
 
   async getProducts() {
@@ -105,13 +108,24 @@ export class DataProvider {
   }
 
   // Get info from status user in the storage
-  isAdmin() {
+  private async getAdmin() {
     return this.storage.get('adminUser')
   }
 
   // Set the user status
-  setAdmin(userStatus: boolean = false) {
-    return this.storage.set('adminUser', userStatus)
+  async setAdmin(userStatus: boolean = false) {
+    await this.storage.set('adminUser', userStatus)
+    this.setStatus()
   }
 
+  // Set status string
+  private async setStatus() {
+    if (await this.getAdmin()) {
+      this.status = 'Admin'
+      this.isAdmin = true
+    } else {
+      this.status = 'Standard'
+      this.isAdmin = false
+    }
+  }
 }

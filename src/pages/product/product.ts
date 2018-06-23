@@ -16,6 +16,7 @@ export class ProductPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private toastCtrl: ToastController, private dataProvider: DataProvider) {
     this.product = navParams.get('product')
     this.initForm()
+    alert(this.dataProvider.isAdmin)
   }
 
   cancel() {

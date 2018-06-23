@@ -2,6 +2,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>Menu</ion-title>
+        <ion-title>{{ dataProvider.status }}</ion-title>
       </ion-toolbar>
     </ion-header>
   
@@ -11,6 +12,8 @@
           {{p.title}}
         </button>
       </ion-list>
+      <button ion-button (click)="switchStatus(true)">Admin</button>
+      <button ion-button (click)="switchStatus(false)">Standard</button>
     </ion-content>
   
   </ion-menu>
