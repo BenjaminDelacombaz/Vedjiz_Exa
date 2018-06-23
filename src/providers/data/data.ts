@@ -109,12 +109,12 @@ export class DataProvider {
   }
 
   // Get info from status user in the storage
-  getUserStatus() {
+  isAdmin() {
     return this.storage.get('userStatus')
   }
 
   // Set the user status
-  setUserStatus(userStatus: number) {
+  setAdmin(userStatus: boolean = false) {
     return this.storage.set('userStatus', userStatus)
   }
 
