@@ -108,5 +108,14 @@ export class DataProvider {
     return this.storage.set('editInProgress', state)
   }
 
+  // Get info from status user in the storage
+  getUserStatus() {
+    return this.storage.get('userStatus')
+  }
+
+  // Set the user status
+  setUserStatus(userStatus: number) {
+    return this.storage.set('userStatus', userStatus)
+  }
 
 }
