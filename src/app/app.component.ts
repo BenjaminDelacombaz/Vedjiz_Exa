@@ -15,15 +15,15 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, onlyAdmin: boolean}>
 
   constructor(private dataProvider: DataProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation and for all
     this.pages = [
-      { title: 'Accueil', component: HomePage },
-      { title: 'Synchronisation', component: SyncroPage }
+      { title: 'Accueil', component: HomePage, onlyAdmin: false },
+      { title: 'Synchronisation', component: SyncroPage, onlyAdmin: true }
     ];
 
   }
