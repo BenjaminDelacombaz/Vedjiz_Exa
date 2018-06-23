@@ -12,6 +12,8 @@ export class ProductPage {
 
   product: Product
   productForm: FormGroup
+  private showForm: boolean
+  private quantity: number = 1
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private toastCtrl: ToastController, private dataProvider: DataProvider) {
     this.product = navParams.get('product')
@@ -54,5 +56,24 @@ export class ProductPage {
     });
 
     toast.present()
+  }
+
+  // Show the form
+  order() {
+    this.showForm = !this.showForm
+  }
+
+  // Add quantity
+  addQuantity() {
+    if (this.quantity < this.product.stock ) {
+      this.quantity++
+    }
+  }
+
+  // Remove quantity
+  removeQuantity() {
+    if (this.quantity > 1 ) {
+      this.quantity -= 1
+    }
   }
 }
