@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../models/product';
-
-// Import SQLite
-// import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-// import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import 'rxjs/add/operator/map'
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http'
@@ -110,12 +106,12 @@ export class DataProvider {
 
   // Get info from status user in the storage
   isAdmin() {
-    return this.storage.get('userStatus')
+    return this.storage.get('adminUser')
   }
 
   // Set the user status
   setAdmin(userStatus: boolean = false) {
-    return this.storage.set('userStatus', userStatus)
+    return this.storage.set('adminUser', userStatus)
   }
 
 }
