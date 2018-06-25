@@ -3,6 +3,7 @@ import { Product } from '../../models/product';
 import 'rxjs/add/operator/map'
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http'
+import { Supplier } from '../../models/supplier';
 
 /*
   Generated class for the DataProvider provider.
@@ -36,7 +37,11 @@ export class DataProvider {
       this.httpClient.get(`${this.endpoint}vegetables`)
       .subscribe(data => {
         Object.keys(data).forEach(key => {
-          products.push(new Product(data[key].id, data[key].productName, data[key].price, data[key].unit, data[key].stock,data[key].image64,[]))
+          let suppliers: Array<Supplier> = []
+          data[key].suppliers.forEach(supplier => {
+            suppliers.push(new Supplier(0, supplier.firstName, supplier.lastName, '', '', supplier.companyName))
+          })
+          products.push(new Product(data[key].id, data[key].productName, data[key].price, data[key].unit, data[key].stock,data[key].image64, suppliers))
         })
         resolve(products)
       },
