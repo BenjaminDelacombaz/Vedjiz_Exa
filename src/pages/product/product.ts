@@ -28,7 +28,7 @@ export class ProductPage {
     this.product.price = this.productForm.controls.price.value
     this.product.unit = this.productForm.controls.unit.value
     this.product.stock = this.productForm.controls.stock.value
-    this.product.edited = true;
+    this.product.edited = true
     this.dataProvider.setProducts()
     this.dataProvider.setEditInProgress(true)
     this.initForm()
