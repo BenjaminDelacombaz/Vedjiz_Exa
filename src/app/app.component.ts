@@ -6,6 +6,7 @@ import { DataProvider } from '../providers/data/data';
 
 import { HomePage } from '../pages/home/home';
 import { SyncroPage } from '../pages/syncro/syncro';
+import { SupplierPage } from '../pages/supplier/supplier'
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +24,7 @@ export class MyApp {
     // used for an example of ngFor and navigation and for all
     this.pages = [
       { title: 'Accueil', component: HomePage, onlyAdmin: false },
-      { title: 'Synchronisation', component: SyncroPage, onlyAdmin: true }
+      { title: 'Synchronisation', component: SyncroPage, onlyAdmin: true },
     ];
 
   }
