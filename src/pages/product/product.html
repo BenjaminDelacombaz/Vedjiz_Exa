@@ -35,7 +35,7 @@
   </div>
   <h4>Fournisseur</h4>
   <ion-list *ngIf="product.suppliers.length > 0">
-    <ion-item *ngFor="let supplier of product.suppliers">
+    <ion-item *ngFor="let supplier of product.suppliers" (click)="openSupplier(supplier)">
       {{ supplier.firstName }} {{ supplier.lastName }} de {{ supplier.companyName }}
     </ion-item>
   </ion-list>

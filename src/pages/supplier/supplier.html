@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>supplier</ion-title>
+    <ion-title>Supplier</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +15,34 @@
 
 <ion-content padding>
 
+  <form [formGroup]="supplierForm">
+    <ion-item>
+      <ion-label >Prénom</ion-label>
+      <ion-input formControlName="firstName" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label >Nom</ion-label>
+      <ion-input formControlName="lastName" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >Tel</ion-label>
+      <ion-input formControlName="phone" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >Adresse</ion-label>
+      <ion-input formControlName="address" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >Companie</ion-label>
+      <ion-input formControlName="companyName" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
+    </ion-item>
+  </form>
+  <div *ngIf="supplierForm.dirty">
+    <button *ngIf="dataProvider.isAdmin" ion-button (click)="save()">Save</button>
+    <button ion-button (click)="cancel()">Cancel</button>
+  </div>
 </ion-content>

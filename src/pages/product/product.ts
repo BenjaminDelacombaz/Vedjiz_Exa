@@ -3,6 +3,7 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Product } from '../../models/product';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataProvider } from '../../providers/data/data';
+import { SupplierPage } from '../supplier/supplier'
 
 @Component({
   selector: 'page-product',
@@ -75,5 +76,10 @@ export class ProductPage {
     if (this.quantity > 1 ) {
       this.quantity -= 1
     }
+  }
+
+  // Open page supplier
+  openSupplier(supplier) {
+    this.navCtrl.push(SupplierPage, {'supplier': supplier})
   }
 }
