@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
 
 /**
  * Generated class for the OrdersPage page.
@@ -14,11 +15,38 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class OrdersPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, private dataProvider: DataProvider, private toastCtrl: ToastController) {
+    this.update()
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OrdersPage');
+  private async update() {
+    try {
+      await this.dataProvider.getOrders()
+    } catch (error) {
+      this.presentToast("Une erreur s'est produite !")
+    }
+  }
+
+  private resetDate() {
+    this.dataProvider.setLastUpdate(new Date('2015-01-01 12:00:00'))
+  }
+
+  async doRefresh(refresher) {
+    try {
+      await this.update()
+      refresher.complete()
+    } catch (error) {
+      this.presentToast("Une erreur s'est produite !")
+    }
+  }
+
+  presentToast(givemessage) {
+    let toast = this.toastCtrl.create({
+      message: givemessage,
+      duration: 3000,
+    });
+
+    toast.present()
   }
 
 }

@@ -26,7 +26,11 @@ export class DataProvider {
   constructor(private storage: Storage, private httpClient: HttpClient) {
     this.getUserName()
     this.setStatus()
-    this.getOrders()
+    try {
+      this.getOrders()
+    } catch (error) {
+      alert(error)
+    }
   }
 
   async getProducts() {
@@ -153,19 +157,20 @@ export class DataProvider {
 
   // Set order 
   setOrder(order) {
-    return this.httpClient.post(`${this.endpoint}order`, {'productid': order.product.id, 'providerid': order.supplier.id, 'placedby': order.placed_by, 'quantity': order.quantity}).toPromise()
+    return this.httpClient.post(`${this.endpoint}order`, {'productid': order.product_id, 'providerid': order.supplier_id, 'placedby': order.placed_by, 'quantity': order.quantity}).toPromise()
   }
 
   // Get orders
-  private async getOrders() {
+  async getOrders() {
     let orders: Array<Order> = []
-    return new Promise<Array<Order>>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.httpClient.get(`${this.endpoint}orders`)
       .subscribe(data => {
         Object.keys(data).forEach(key => {
           orders.push(new Order(data[key].id, data[key].productName, data[key].quantity, data[key].companyName, data[key].placed_by))
         })
-        resolve(orders)
+        this.orders = orders
+        resolve(true)
       },
       error => {
         reject(error)
