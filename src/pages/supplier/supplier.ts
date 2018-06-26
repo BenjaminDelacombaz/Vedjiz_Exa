@@ -3,7 +3,6 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Supplier } from '../../models/supplier';
 import { DataProvider } from '../../providers/data/data';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Product } from '../../models/product';
 
 /**
  * Generated class for the SupplierPage page.

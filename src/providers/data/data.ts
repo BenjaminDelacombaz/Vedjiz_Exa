@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map'
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http'
 import { Supplier } from '../../models/supplier';
+import { Order } from '../../models/order';
+import { resolveDefinition } from '@angular/core/src/view/util';
 
 /*
   Generated class for the DataProvider provider.
@@ -16,6 +18,7 @@ export class DataProvider {
 
   private endpoint: string = `http://vedjserver.mycpnv.ch/api/v1/`
   products: Array<Product> = []
+  orders: Array<Order> = []
   status: string
   isAdmin: boolean
   userName: string
@@ -23,6 +26,7 @@ export class DataProvider {
   constructor(private storage: Storage, private httpClient: HttpClient) {
     this.getUserName()
     this.setStatus()
+    this.getOrders()
   }
 
   async getProducts() {
@@ -41,7 +45,7 @@ export class DataProvider {
         Object.keys(data).forEach(key => {
           let suppliers: Array<Supplier> = []
           data[key].suppliers.forEach(supplier => {
-            suppliers.push(new Supplier(0, supplier.firstName, supplier.lastName, '', '', supplier.companyName))
+            suppliers.push(new Supplier(supplier.id, supplier.firstName, supplier.lastName, '', '', supplier.companyName))
           })
           products.push(new Product(data[key].id, data[key].productName, data[key].price, data[key].unit, data[key].stock,data[key].image64, suppliers, data[key].low_stock_threshold))
         })
@@ -80,6 +84,7 @@ export class DataProvider {
 
   async updateLocal() {
       await this.clear()
+      await this.setUserName()
       this.products = await this.getProductsFromApi()
       await this.setProducts()
       
@@ -145,4 +150,27 @@ export class DataProvider {
   private async getUserName() {
     this.userName = await this.storage.get("user_name")
   }
+
+  // Set order 
+  setOrder(order) {
+    return this.httpClient.post(`${this.endpoint}order`, {'productid': order.product.id, 'providerid': order.supplier.id, 'placedby': order.placed_by, 'quantity': order.quantity}).toPromise()
+  }
+
+  // Get orders
+  private async getOrders() {
+    let orders: Array<Order> = []
+    return new Promise<Array<Order>>((resolve, reject) => {
+      this.httpClient.get(`${this.endpoint}orders`)
+      .subscribe(data => {
+        Object.keys(data).forEach(key => {
+          orders.push(new Order(data[key].id, data[key].productName, data[key].quantity, data[key].companyName, data[key].placed_by))
+        })
+        resolve(orders)
+      },
+      error => {
+        reject(error)
+      })
+    })
+  }
+
 }

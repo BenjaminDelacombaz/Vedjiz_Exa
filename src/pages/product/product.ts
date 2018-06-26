@@ -4,6 +4,7 @@ import { Product } from '../../models/product';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataProvider } from '../../providers/data/data';
 import { SupplierPage } from '../supplier/supplier'
+import { OrderPage } from '../order/order';
 
 @Component({
   selector: 'page-product',
@@ -13,14 +14,10 @@ export class ProductPage {
 
   product: Product
   productForm: FormGroup
-  private showForm: boolean
-  private quantity: number = 1
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private toastCtrl: ToastController, private dataProvider: DataProvider) {
     this.product = navParams.get('product')
     this.initForm()
-
-    console.log(this.product)
   }
 
   cancel() {
@@ -63,27 +60,12 @@ export class ProductPage {
     toast.present()
   }
 
-  // Show the form
-  order() {
-    this.showForm = !this.showForm
-  }
-
-  // Add quantity
-  addQuantity() {
-    if (this.quantity < this.product.stock ) {
-      this.quantity++
-    }
-  }
-
-  // Remove quantity
-  removeQuantity() {
-    if (this.quantity > 1 ) {
-      this.quantity -= 1
-    }
-  }
-
   // Open page supplier
-  openSupplier(supplier) {
-    this.navCtrl.push(SupplierPage, {'supplier': supplier})
+  // openSupplier(supplier) {
+  //   this.navCtrl.push(SupplierPage, {'supplier': supplier})
+  // }
+
+  openOrder(supplier) {
+    this.navCtrl.push(OrderPage, {'supplier': supplier, 'product': this.product})
   }
 }
