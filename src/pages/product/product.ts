@@ -19,6 +19,8 @@ export class ProductPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private toastCtrl: ToastController, private dataProvider: DataProvider) {
     this.product = navParams.get('product')
     this.initForm()
+
+    console.log(this.product)
   }
 
   cancel() {
@@ -29,6 +31,7 @@ export class ProductPage {
     this.product.price = this.productForm.controls.price.value
     this.product.unit = this.productForm.controls.unit.value
     this.product.stock = this.productForm.controls.stock.value
+    this.product.lowStockThreshold = this.productForm.controls.lowStockThreshold.value
     this.product.edited = true
     this.dataProvider.setProducts()
     this.dataProvider.setEditInProgress(true)
@@ -46,7 +49,8 @@ export class ProductPage {
     this.productForm = this.formBuilder.group({
       price: [this.product.price],
       unit: [this.product.unit],
-      stock: [this.product.stock]
+      stock: [this.product.stock],
+      lowStockThreshold: [this.product.lowStockThreshold]
     });
   }
 

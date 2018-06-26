@@ -16,6 +16,7 @@
   <ion-list *ngIf="dataProvider.products != null">
     <ion-item *ngFor="let product of dataProvider.products" (click)="openProduct(product)">
       <img class="images" center src="{{ product.picture }}" /> <h2 class="text"> {{ product.name }} ({{ product.price }} chf/{{ product.unit }})</h2>
+      <ion-icon *ngIf="product.lowStockThreshold <= product.stock" name="warning"></ion-icon>
     </ion-item>
   </ion-list>
   <button ion-button (click)="resetDate()">Reset Date (DEV)</button>

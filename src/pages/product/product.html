@@ -28,6 +28,11 @@
       <ion-label >Stock</ion-label>
       <ion-input formControlName="stock" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label >Alerte à </ion-label>
+      <ion-input formControlName="lowStockThreshold" type="text" [readonly]="!dataProvider.isAdmin"></ion-input>
+    </ion-item>
   </form>
   <div *ngIf="productForm.dirty">
     <button *ngIf="dataProvider.isAdmin" ion-button (click)="save()">Save</button>

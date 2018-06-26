@@ -43,7 +43,7 @@ export class DataProvider {
           data[key].suppliers.forEach(supplier => {
             suppliers.push(new Supplier(0, supplier.firstName, supplier.lastName, '', '', supplier.companyName))
           })
-          products.push(new Product(data[key].id, data[key].productName, data[key].price, data[key].unit, data[key].stock,data[key].image64, suppliers))
+          products.push(new Product(data[key].id, data[key].productName, data[key].price, data[key].unit, data[key].stock,data[key].image64, suppliers, data[key].low_stock_threshold))
         })
         resolve(products)
       },

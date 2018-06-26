@@ -9,8 +9,9 @@ export class Product {
   picture: string
   suppliers: Array<Supplier>
   edited: boolean
+  lowStockThreshold: number
 
-  constructor(id: number, name: string, price: number, unit: string, stock: number, picture: string, suppliers: Array<Supplier> = []) {
+  constructor(id: number, name: string, price: number, unit: string, stock: number, picture: string, suppliers: Array<Supplier> = [], lowStockThreshold: number) {
     this.id = id
     this.name = name
     this.price = price
@@ -18,7 +19,8 @@ export class Product {
     this.stock = stock
     this.picture = picture
     this.suppliers = suppliers
-    this.edited = false;
+    this.edited = false
+    this.lowStockThreshold = lowStockThreshold
   }
 
 }
