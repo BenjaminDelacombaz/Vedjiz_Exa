@@ -18,8 +18,10 @@ export class DataProvider {
   products: Array<Product> = []
   status: string
   isAdmin: boolean
+  userName: string
 
   constructor(private storage: Storage, private httpClient: HttpClient) {
+    this.getUserName()
     this.setStatus()
   }
 
@@ -132,5 +134,15 @@ export class DataProvider {
       this.status = 'Standard'
       this.isAdmin = false
     }
+  }
+
+  // Set the name in the storage
+  setUserName(userName: string = this.userName) {
+    return this.storage.set("user_name", userName)
+  }
+
+  // Get the name from the storage
+  private async getUserName() {
+    this.userName = await this.storage.get("user_name")
   }
 }
