@@ -14,6 +14,7 @@ import { ProductPage } from '../pages/product/product';
 import { SupplierPage } from '../pages/supplier/supplier'
 import { SettingsPage } from '../pages/settings/settings';
 import { OrderPage } from '../pages/order/order'
+import { OrdersPage } from '../pages/orders/orders';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { OrderPage } from '../pages/order/order'
     ProductPage,
     SupplierPage,
     SettingsPage,
-    OrderPage
+    OrderPage,
+    OrdersPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { OrderPage } from '../pages/order/order'
     ProductPage,
     SupplierPage,
     SettingsPage,
-    OrderPage
+    OrderPage,
+    OrdersPage
   ],
   providers: [
     StatusBar,
