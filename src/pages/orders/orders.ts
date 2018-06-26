@@ -53,6 +53,7 @@ export class OrdersPage {
   async deleteOrder(order) {
     try {
       await this.dataProvider.deleteOrder(order)
+      this.presentToast("Commande supprimée !")
       await this.update()
     } catch (error) {
       this.presentToast("Une erreur s'est produite !")
