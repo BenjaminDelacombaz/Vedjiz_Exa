@@ -27,10 +27,6 @@ export class OrdersPage {
     }
   }
 
-  private resetDate() {
-    this.dataProvider.setLastUpdate(new Date('2015-01-01 12:00:00'))
-  }
-
   async doRefresh(refresher) {
     try {
       await this.update()
