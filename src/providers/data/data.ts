@@ -178,4 +178,9 @@ export class DataProvider {
     })
   }
 
+  // Delete an order
+  deleteOrder(order) {
+    return this.httpClient.post(`${this.endpoint}withdraw`, {'orderid': order.id}).toPromise()
+  }
+
 }

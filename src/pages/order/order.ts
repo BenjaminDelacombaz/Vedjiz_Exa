@@ -27,7 +27,7 @@ export class OrderPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private toastCtrl: ToastController, private dataProvider: DataProvider) {
     this.product = navParams.get('product')
     this.supplier = navParams.get('supplier')
-    this.order = new Order(0, this.product, 0, this.supplier, this.dataProvider.userName)
+    this.order = new Order(0, this.product.name, 0, this.supplier.companyName, this.dataProvider.userName, this.product.id, this.supplier.id)
     this.initForm()
   }
 
@@ -38,14 +38,13 @@ export class OrderPage {
   async save() {
     this.order.quantity = this.orderForm.controls.quantity.value
     this.dataProvider.orders.push(this.order)
-    console.log(this.order)
     try {
       await this.dataProvider.setOrder(this.order)
       this.presentToast('Votre commande à été enregistrer avec succès')
+      this.navCtrl.popToRoot()
     } catch (error) {
       this.presentToast('Une erreur est survenue')
     }
-    // this.dataProvider.setEditInProgress(true)
     this.initForm()
   }
 

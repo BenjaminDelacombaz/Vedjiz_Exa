@@ -49,4 +49,14 @@ export class OrdersPage {
     toast.present()
   }
 
+  // Delete an order
+  async deleteOrder(order) {
+    try {
+      await this.dataProvider.deleteOrder(order)
+      await this.update()
+    } catch (error) {
+      this.presentToast("Une erreur s'est produite !")
+    }
+  }
+
 }
