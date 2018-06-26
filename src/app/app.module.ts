@@ -13,6 +13,7 @@ import { SyncroPage } from '../pages/syncro/syncro';
 import { ProductPage } from '../pages/product/product';
 import { SupplierPage } from '../pages/supplier/supplier'
 import { SettingsPage } from '../pages/settings/settings';
+import { OrderPage } from '../pages/order/order'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SettingsPage } from '../pages/settings/settings';
     SyncroPage,
     ProductPage,
     SupplierPage,
-    SettingsPage
+    SettingsPage,
+    OrderPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { SettingsPage } from '../pages/settings/settings';
     SyncroPage,
     ProductPage,
     SupplierPage,
-    SettingsPage
+    SettingsPage,
+    OrderPage
   ],
   providers: [
     StatusBar,
