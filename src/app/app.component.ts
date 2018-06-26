@@ -6,7 +6,7 @@ import { DataProvider } from '../providers/data/data';
 
 import { HomePage } from '../pages/home/home';
 import { SyncroPage } from '../pages/syncro/syncro';
-import { SupplierPage } from '../pages/supplier/supplier'
+import { SettingsPage } from '../pages/settings/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +25,7 @@ export class MyApp {
     this.pages = [
       { title: 'Accueil', component: HomePage, onlyAdmin: false },
       { title: 'Synchronisation', component: SyncroPage, onlyAdmin: true },
+      { title: 'Paramètres', component: SettingsPage, onlyAdmin: false }
     ];
 
   }
